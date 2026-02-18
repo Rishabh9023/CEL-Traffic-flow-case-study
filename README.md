@@ -16,7 +16,6 @@ The objectives are:
 * Determine steady-state traffic flow on each road
 * Analyze the effect of turning movements
 * Include congestion effects (nonlinearity)
-* Apply kinetic theory analogy
 * Simulate real-time traffic evolution using numerical methods
 
 ### Concepts Used (LAB 1–5)
@@ -24,8 +23,6 @@ The objectives are:
 * Conservation law at intersections
 * Linear algebra formulation
 * Nonlinear congestion modeling
-* Kinetic theory of traffic flow
-* Euler method for time-dependent simulation
 
 This study demonstrates the application of computational engineering techniques to real-world traffic systems.
 
@@ -181,91 +178,12 @@ grid on
 
 ---
 
-## 📊 Kinetic Theory of Traffic (LAB 2)
 
-Traffic behaves like particle flow:
-
-[
-q = kv
-]
-
-Velocity-density relation:
-
-[
-v = v_{max}(1 - k/k_{max})
-]
-
-```matlab
-k = linspace(0,200,100);
-vmax = 60;
-kmax = 200;
-
-v = vmax*(1 - k/kmax);
-q = k.*v;
-
-figure
-yyaxis left
-plot(k,q)
-ylabel('Flow (veh/hr)')
-
-yyaxis right
-plot(k,v)
-ylabel('Velocity (km/hr)')
-
-xlabel('Density (veh/km)')
-title('Density vs Velocity vs Flow')
-grid on
-```
-
-This produces the **fundamental diagram of traffic flow**.
-
----
-
-## ⏱️ Euler Time Simulation (LAB 1)
-
-Dynamic model:
-
-[
-\frac{dx}{dt} = Inflow - Outflow
-]
-
-```matlab
-dt = 0.1;
-T = 20;
-time = 0:dt:T;
-
-x = zeros(4,length(time));
-x(:,1) = [50;40;60;30];
-
-inflow = [20;25;15;18];
-alpha = 0.0005;
-
-for i = 1:length(time)-1
-    outflow = x(:,i).*(1 - alpha*x(:,i));
-    dxdt = inflow - outflow;
-    x(:,i+1) = x(:,i) + dt*dxdt;
-end
-
-figure
-plot(time,x(1,:),time,x(2,:),time,x(3,:),time,x(4,:),'LineWidth',1.5)
-legend('North','South','East','West')
-xlabel('Time (min)')
-ylabel('Vehicles')
-title('Traffic Evolution using Euler Method')
-grid on
-```
-
-The system stabilizes over time, representing real traffic equilibrium.
-
----
 
 ## 📉 Stability and Interpretation
 
 * Linear model gives ideal distribution
 * Congestion reduces effective flow
-* Kinetic theory explains traffic breakdown
-* Euler simulation shows transient behavior
-* System reaches steady equilibrium
 
 Stability condition:
 
@@ -273,7 +191,6 @@ Stability condition:
 \alpha x < 1
 ]
 
----
 
 ## 📈 Results and Discussion
 
@@ -294,7 +211,6 @@ These results match real-world traffic behavior.
 * Conservation-based system modeling
 * MATLAB matrix operations
 * Nonlinear system analysis
-* Euler numerical simulation
 
 ---
 
@@ -309,12 +225,5 @@ These results match real-world traffic behavior.
 
 ## ✅ Conclusion
 
-This case study models traffic flow at a four-way junction using conservation principles and matrix algebra. The linear solution provides steady-state distribution, while congestion modeling introduces realistic behavior. The kinetic theory explains the density–flow relationship, and Euler simulation demonstrates time-dependent stabilization.
+This case study models traffic flow at a four-way junction using conservation principles and matrix algebra. The linear solution provides steady-state distribution, while congestion modeling introduces realistic behavior. 
 
-The study highlights the effectiveness of computational engineering methods in analyzing real-world traffic systems.
-
-
-* Folder structure
-* `.m` file ready
-* Junction diagram image
-* README badges (MATLAB, Linear Algebra, Computational Engineering).
