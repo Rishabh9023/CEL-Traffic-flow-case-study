@@ -1,224 +1,132 @@
-# 🚦 Traffic Flow Balance at Road Junctions
+# Traffic-Flow-Balance-at-Road-Junctions
+Traffic Flow Balance at Road Junctions using Matrix Formulation and Non-Linear Congestion Modeling
 
-**Author:** Rishabh Badgujar
-**Roll No:** 23BME035
-**Course:** Computational Engineering Lab
-**Tool Used:** MATLAB
-
----
-
-## 📌 Project Overview
-
-This case study models traffic flow distribution at a four-way road junction using the principle of **conservation of vehicles**.
-
-The objectives are:
-
-* Determine steady-state traffic flow on each road
-* Analyze the effect of turning movements
-* Include congestion effects (nonlinearity)
-* Simulate real-time traffic evolution using numerical methods
-
-### Concepts Used (LAB 1–5)
-
-* Conservation law at intersections
-* Linear algebra formulation
-* Nonlinear congestion modeling
-
-This study demonstrates the application of computational engineering techniques to real-world traffic systems.
+# 🚦 Traffic Flow Balance at Road Junctions  
+### Computational Engineering Lab Case Study
 
 ---
 
-## 🚗 Background and Motivation
+## 📌 Aim
 
-Urban intersections are critical points where multiple traffic streams interact. Traffic behavior depends on:
-
-* Incoming vehicle rates
-* Turning proportions
-* Road capacity
-* Congestion level
-
-As traffic density increases, vehicle speed decreases, reducing effective flow. Therefore, realistic modeling requires both linear and nonlinear analysis.
+To model traffic flow balance at a four-way road junction using the principle of conservation of vehicles, formulate the system in matrix form, and compute traffic flows.  
+The model also incorporates nonlinear congestion effects and kinetic theory concepts to improve realism.
 
 ---
 
-## 🛣️ Junction Description and Assumptions
+## 📖 Problem Description
 
-Four incoming roads:
+At a four-way intersection (North, South, East, West):
 
-| Road | Direction |
-| ---- | --------- |
-| x₁   | North     |
-| x₂   | South     |
-| x₃   | East      |
-| x₄   | West      |
+- Vehicles enter from each direction.
+- Each vehicle may turn left, right, go straight, or take a U-turn.
+- The redistribution of vehicles is represented using a turning ratio matrix.
 
-### Turning Proportions
+The governing principle:
 
-* Straight: **40%**
-* Left: **30%**
-* Right: **20%**
-* U-turn: **10%**
-
-### Outgoing Demand
-
-B = 
-[
-  180
-  160
-  150
-  170
-] 
-(vehicles/min)
-
-### Assumptions
-
-* Continuous traffic flow
-* Constant turning ratios
-* No signal control
-* Initial steady-state conditions
+**Total Inflow = Total Outflow**
 
 ---
 
-## 📐 Mathematical Formulation
+## 🧮 Mathematical Formulation
 
-### Conservation of Vehicles
+### 1️⃣ Matrix Model (Conservation Law)
 
-At steady state:
+Incoming traffic vector:
 
-[
-AX = B
-]
+X_in = [N; S; E; W]
 
-where
+Turning ratio matrix:
 
-X = [
-  x1
-  x2
-  x3
-  x4
-]
-
-Traffic distribution matrix:
-
-[
-A =
-\begin{bmatrix}
-0.3 & 0.2 & 0.1 & 0.4 \
-0.2 & 0.3 & 0.4 & 0.1 \
-0.1 & 0.4 & 0.2 & 0.3 \
-0.4 & 0.1 & 0.3 & 0.2
-\end{bmatrix}
-]
-
-Solution:
-
-[
-X = A^{-1}B
-]
-
----
-
-## 💻 MATLAB Implementation
-
-### Part 1: Linear Traffic Flow (LAB 3)
-
-```matlab
-clc; clear; close all;
-
-A = [0.3 0.2 0.1 0.4;
-     0.2 0.3 0.4 0.1;
-     0.1 0.4 0.2 0.3;
-     0.4 0.1 0.3 0.2];
-
-B = [180;160;150;170];
-
-X_linear = A\B;
-
-disp('Linear Traffic Flow (veh/min)')
-disp(X_linear)
-```
-
----
-
-## ⚠️ Congestion Modeling (LAB 5)
-
-Traffic flow reduces at high density:
-
-[
-q = x(1 - \alpha x)
-]
+X_out = T × X_in
 
 Where:
-
-[
-\alpha = 0.0005
-]
-
-```matlab
-alpha = 0.0005;
-
-X_cong = X_linear .* (1 - alpha*X_linear);
-
-disp('Traffic Flow with Congestion Effect')
-disp(X_cong)
-
-figure
-bar([X_linear X_cong])
-legend('Linear','With Congestion')
-xlabel('Road Number')
-ylabel('Flow (veh/min)')
-title('Effect of Congestion at Junction')
-grid on
-```
+- T = Turning ratio matrix
+- Each column of T sums to 1
+- Ensures conservation of vehicles
 
 ---
 
+### 2️⃣ Nonlinear Congestion Effect
 
+To model realistic traffic behavior:
 
-## 📉 Stability and Interpretation
+F = X (1 - X / C)
 
-* Linear model gives ideal distribution
-* Congestion reduces effective flow
+Where:
+- C = Road capacity
+- Flow reduces as traffic approaches capacity
 
-Stability condition:
-
-[
-\alpha x < 1
-]
-
-
-## 📈 Results and Discussion
-
-The model demonstrates:
-
-* Interdependence between roads
-* Nonlinear congestion effects
-* Existence of optimal traffic density
-* Dynamic stabilization over time
-
-These results match real-world traffic behavior.
+This introduces controlled nonlinearity into the system.
 
 ---
 
-## 🎯 Learning Outcomes
+## 📊 Results and Graphs
 
-* Application of Linear Algebra in engineering
-* Conservation-based system modeling
-* MATLAB matrix operations
-* Nonlinear system analysis
+The MATLAB code generates:
+
+- Incoming vs Outgoing Traffic comparison
+- Congestion effect visualization
+
+### 🔹 1. Matrix Redistribution of Traffic
+
+<p align="center">
+  <img src="matrix_flow.png" width="600">
+</p>
+
+This graph compares incoming and outgoing traffic at the junction using matrix formulation.
 
 ---
 
-## 🔮 Future Scope
+### 🔹 2. Effect of Congestion
 
-* Traffic signal optimization
-* Multi-intersection modeling
-* Real traffic data integration
-* Traffic flow optimization
+<p align="center">
+  <img src="congestion_effect.png" width="600">
+</p>
+
+This graph shows how traffic flow decreases when congestion effects are introduced.
 
 ---
 
-## ✅ Conclusion
+## 🛠 Concepts Used (Lab 1–5)
 
-This case study models traffic flow at a four-way junction using conservation principles and matrix algebra. The linear solution provides steady-state distribution, while congestion modeling introduces realistic behavior. 
+- Linear algebra (Matrix formulation)
+- Conservation laws
+- Nonlinear modeling
+- MATLAB plotting and simulation
+
+---
+⸻
+
+->How to Run the Project
+	1.	Open MATLAB
+	2.	Copy the provided .m script
+	3.	Run the file
+	4.	Observe the results
+
+⸻
+
+⸻
+
+Author
+
+Rishabh Badgujar
+3rd year Mechanical Engineering Student
+Computational Engineering Laboratory Project
+
+⸻
+
+## 📂 Repository Structure
+
+Traffic-Flow-Balance-at-Road-Junctions/
+│
+├── Traffic_Flow_Final.m
+├── README.md
+
+---
+
+## 🎯 Conclusion
+
+Traffic flow at road junctions can be effectively modeled using matrix-based conservation principles.  
+Nonlinear congestion modeling enhances realism, while kinetic theory explains the density-flow relationship.  
+Numerical methods allow simulation of dynamic traffic behavior.
 
