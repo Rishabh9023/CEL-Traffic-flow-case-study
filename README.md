@@ -78,9 +78,8 @@ This graph compares incoming and outgoing traffic at the junction using matrix f
 
 ### 🔹 2. Effect of Congestion
 
-<p align="center">
-  <img src="congestion_effect.png" width="600">
-</p>
+<img width="971" height="614" alt="image" src="https://github.com/user-attachments/assets/6cfec83c-b020-4af3-b53d-714cdb083cdd" />
+
 
 This graph shows how traffic flow decreases when congestion effects are introduced.
 
