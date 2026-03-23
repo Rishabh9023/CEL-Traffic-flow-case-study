@@ -69,9 +69,8 @@ The MATLAB code generates:
 
 ### 🔹 1. Matrix Redistribution of Traffic
 
-<p align="center">
-  <img src="matrix_flow.png" width="600">
-</p>
+<img width="1032" height="664" alt="image" src="https://github.com/user-attachments/assets/fe1d6fc8-2feb-4a09-9473-8abc17b97860" />
+
 
 This graph compares incoming and outgoing traffic at the junction using matrix formulation.
 
