@@ -102,8 +102,6 @@ This graph shows how traffic flow decreases when congestion effects are introduc
 
 ⸻
 
-⸻
-
 Author
 
 Rishabh Badgujar
