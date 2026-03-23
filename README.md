@@ -125,6 +125,5 @@ Traffic-Flow-Balance-at-Road-Junctions/
 ## 🎯 Conclusion
 
 Traffic flow at road junctions can be effectively modeled using matrix-based conservation principles.  
-Nonlinear congestion modeling enhances realism, while kinetic theory explains the density-flow relationship.  
-Numerical methods allow simulation of dynamic traffic behavior.
+Nonlinear congestion modeling enhances realism.
 
