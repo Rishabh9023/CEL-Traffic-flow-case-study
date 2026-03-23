@@ -9,7 +9,6 @@ Traffic Flow Balance at Road Junctions using Matrix Formulation and Non-Linear C
 ## 📌 Aim
 
 To model traffic flow balance at a four-way road junction using the principle of conservation of vehicles, formulate the system in matrix form, and compute traffic flows.  
-The model also incorporates nonlinear congestion effects and kinetic theory concepts to improve realism.
 
 ---
 
