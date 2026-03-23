@@ -61,15 +61,13 @@ Four incoming roads:
 
 ### Outgoing Demand
 
+B = 
 [
-B =
-\begin{bmatrix}
-180 \
-160 \
-150 \
-170
-\end{bmatrix}
-]
+  180
+  160
+  150
+  170
+] 
 (vehicles/min)
 
 ### Assumptions
@@ -93,14 +91,11 @@ AX = B
 
 where
 
-[
-X =
-\begin{bmatrix}
-x_1 \
-x_2 \
-x_3 \
-x_4
-\end{bmatrix}
+X = [
+  x1
+  x2
+  x3
+  x4
 ]
 
 Traffic distribution matrix:
